@@ -8,7 +8,7 @@
 * **Deiby Valencia Tobón**
 * **Andrés Felipe Mejía Corrales**
 * **Johan Hawasly Méndez**
-
+* **Juan David Zapata Barrera**
 ---
 
 ## 📝 1. Problemática
