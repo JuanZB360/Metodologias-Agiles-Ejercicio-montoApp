@@ -28,36 +28,39 @@ const DB = {
 
     // --- GESTIÓN DE INVENTARIO ---
     getProducts: () => DB._get(DB.KEYS.PRODUCTS),
+    
     saveProduct(product) {
         const products = this.getProducts();
         product.id = Date.now();
         products.push(product);
         this._save(this.KEYS.PRODUCTS, products);
     },
+    
     updateProductStock(productId, quantityToSubtract) {
         const products = this.getProducts();
         const index = products.findIndex(p => p.id == productId);
         if (index !== -1) {
-            products[index].stock = parseInt(products[index].stock) - parseInt(quantityToSubtract);
+            products[index].stock = parseInt(products[index].stock, 10) - parseInt(quantityToSubtract, 10);
             this._save(this.KEYS.PRODUCTS, products);
         }
     },
 
     // --- GESTIÓN DE VENTAS Y CARTERA ---
     getSales: () => DB._get(DB.KEYS.SALES),
+    
     processSale(sale) {
         const products = this.getProducts();
         const product = products.find(p => p.id == sale.productId);
 
         // Validación de Stock
-        if (!product || parseInt(product.stock) < parseInt(sale.quantity)) {
+        if (!product || parseInt(product.stock, 10) < parseInt(sale.quantity, 10)) {
             throw new Error(`Stock insuficiente. Disponible: ${product ? product.stock : 0}`);
         }
 
         // Registrar Venta
         const sales = this.getSales();
         sale.id = `SALE-${Date.now()}`;
-        sale.total = parseFloat(sale.price) * parseInt(sale.quantity);
+        sale.total = parseFloat(sale.price) * parseInt(sale.quantity, 10);
         sale.balance = sale.paymentMode === 'fiado' ? (sale.total - parseFloat(sale.initialPayment)) : 0;
         sale.history = [{ date: new Date().toISOString(), amount: sale.initialPayment || sale.total }];
         

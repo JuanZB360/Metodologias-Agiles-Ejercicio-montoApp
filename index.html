@@ -1,35 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GestorVentas Pro</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="GestorVentas Pro - Sistema integral para control de inventario, registro de ventas y gestión de cartera de clientes."
+    />
+    <title>GestorVentas Pro | Control de Inventario y Cartera</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="bg-gray-100 pb-20">
-
-    <header class="bg-indigo-600 text-white p-4 shadow-md flex justify-between items-center sticky top-0 z-40">
-        <h1 class="text-xl font-bold">Ventas & Cartera</h1>
-        <button id="logout-btn" class="hidden text-sm bg-indigo-700 px-3 py-1 rounded">Salir</button>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      rel="shortcut icon"
+      href="img/icon-color-montoapp.png"
+      type="image/x-icon"
+    />
+    <style>
+      /* Ocultar flechas en inputs numéricos para un diseño más limpio */
+      input[type="number"]::-webkit-inner-spin-button,
+      input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-slate-50 text-slate-800 pb-24 font-sans selection:bg-indigo-200"
+  >
+    <header
+      class="bg-indigo-600 text-white p-4 shadow-md flex justify-between items-center sticky top-0 z-40"
+    >
+      <div class="flex items-center gap-2 max-w-4xl mx-auto w-full px-2">
+        <i class="fas fa-chart-line text-xl"></i>
+        <h1 class="text-xl font-bold tracking-wide">GestorVentas</h1>
+        <div class="flex-1"></div>
+        <button
+          id="logout-btn"
+          aria-label="Cerrar sesión"
+          class="hidden text-sm font-medium bg-indigo-700 hover:bg-indigo-800 transition-colors px-4 py-1.5 rounded-full shadow-sm"
+        >
+          Salir
+        </button>
+      </div>
     </header>
 
-    <main id="app" class="p-4 max-w-2xl mx-auto">
-        </main>
+    <main
+      id="app"
+      class="p-4 md:p-6 max-w-4xl mx-auto"
+      aria-live="polite"
+    ></main>
 
-    <nav id="bottom-nav" class="hidden fixed bottom-0 left-0 right-0 bg-white border-t flex justify-around p-2 shadow-2xl z-50">
-        <button onclick="Router.go('inventory')" class="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-            <i class="fas fa-boxes text-xl"></i><span class="text-xs">Stock</span>
+    <div
+      class="fixed bottom-0 left-0 right-0 z-50 flex justify-center pointer-events-none"
+    >
+      <nav
+        id="bottom-nav"
+        aria-label="Navegación principal"
+        class="hidden bg-white/90 backdrop-blur-md border-t border-gray-200 w-full max-w-4xl flex justify-around p-2 pb-4 md:pb-2 shadow-[0_-10px_40px_rgba(0,0,0,0.08)] pointer-events-auto md:rounded-t-2xl"
+      >
+        <button
+          onclick="Router.go('inventory')"
+          class="flex flex-col items-center text-gray-500 hover:text-indigo-600 focus:text-indigo-600 transition-colors w-1/4 p-1"
+        >
+          <i class="fas fa-boxes text-xl mb-1"></i
+          ><span class="text-[10px] font-semibold uppercase tracking-wider"
+            >Stock</span
+          >
         </button>
-        <button onclick="Router.go('new-sale')" class="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-            <i class="fas fa-plus-circle text-xl"></i><span class="text-xs">Vender</span>
+        <button
+          onclick="Router.go('new-sale')"
+          class="flex flex-col items-center text-gray-500 hover:text-indigo-600 focus:text-indigo-600 transition-colors w-1/4 p-1"
+        >
+          <i class="fas fa-cart-plus text-xl mb-1"></i
+          ><span class="text-[10px] font-semibold uppercase tracking-wider"
+            >Vender</span
+          >
         </button>
-        <button onclick="Router.go('wallet')" class="flex flex-col items-center text-gray-600 hover:text-indigo-600">
-            <i class="fas fa-hand-holding-usd text-xl"></i><span class="text-xs">Cartera</span>
+        <button
+          onclick="Router.go('wallet')"
+          class="flex flex-col items-center text-gray-500 hover:text-indigo-600 focus:text-indigo-600 transition-colors w-1/4 p-1"
+        >
+          <i class="fas fa-wallet text-xl mb-1"></i
+          ><span class="text-[10px] font-semibold uppercase tracking-wider"
+            >Cartera</span
+          >
         </button>
-    </nav>
+        <button
+          onclick="Router.go('history')"
+          class="flex flex-col items-center text-gray-500 hover:text-indigo-600 focus:text-indigo-600 transition-colors w-1/4 p-1"
+        >
+          <i class="fas fa-receipt text-xl mb-1"></i
+          ><span class="text-[10px] font-semibold uppercase tracking-wider"
+            >Ventas</span
+          >
+        </button>
+      </nav>
+    </div>
 
     <script src="database.js"></script>
     <script src="app.js"></script>
-</body>
+  </body>
 </html>
